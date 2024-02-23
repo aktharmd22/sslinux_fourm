@@ -1,0 +1,94 @@
+*{
+    font-family: 'poppins',sans-serif;
+}
+#body{
+    background-color: #ecf0f1;
+}
+
+/* 
+#card {
+            background-color: #f1eeee;
+            padding: 10px;
+            border-radius: 3px;
+            box-shadow: 0 2px 4px;
+            margin: 15px 20px;
+        } */
+        
+        
+        #navBanner {
+            width: 100px;
+        }
+
+        #card ul li a {
+            color: #000;
+        }
+
+        #card ul li a:hover {
+            color: #2366cc;
+            ;
+        }
+
+        #card ul li {
+            list-style: square inside;
+        }
+
+        #definition {
+            font-size: 12px;
+        }
+
+        #cardHead {
+            color: #2366cc;
+            font-weight: bold;
+        }
+
+        #heading {
+            margin: 10px 20px;
+        }
+
+        
+
+        #leftMenu {
+            display: flex;
+            align-items: center;
+        }
+        #navBar{
+            background-color: #fff;
+        }
+        #logo{
+            width: 100px;
+        }
+        #askQA{
+            margin-top: -60px;
+        }
+        #query{
+            
+            margin:20px 15px;
+            padding: 15px;
+            border-radius: 5px;
+            
+        }
+
+        @media (max-width:999px) {
+            #askQA{
+                visibility: hidden;
+                text-align: center;
+            }
+            #mobileViewNone{
+                display: none;
+            }
+        }
+
+#forumTable{
+    border-radius: 5px;
+    
+}
+#tags{
+    display: flex;
+    list-style: none;
+}
+#tags li{
+    background-color: #e6e6e6;
+    margin: 3px;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
