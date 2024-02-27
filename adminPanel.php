@@ -76,7 +76,7 @@ s0.parentNode.insertBefore(s1,s0);
         }
         #descWidth{
             width: 40vw;
-            text-align: justify;
+           
         }
     </style>
 
@@ -129,8 +129,13 @@ s0.parentNode.insertBefore(s1,s0);
             <h2>Our Support Center</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, eius?</p>
             <div>
-                <input type="text">
-                <button>Search</button>
+            <form action="" method="get">
+                    
+                    <input type="text"  name="search" placeholder="Search posts" aria-label="Search posts" aria-describedby="button-addon2">
+                   
+                        <button  type="submit" id="button-addon2">Search</button>
+                 
+            </form>
             </div>
         </div>
     </div>
@@ -176,57 +181,75 @@ s0.parentNode.insertBefore(s1,s0);
                 </div>
                 
 
-                <div class="col-12" id="Blogs">
-                    <table class="table table-stripped table-hover" id="forumTable">
-                        <thead>
-                          <tr>
-                            <th>FORUM</th>
-                            <!-- <th id="mobileViewNone">Topics</th>
-                            <th id="mobileViewNone">Views</th> -->
-                            <th>Last Post</th>
-                          </tr>
-                        </thead>
-                        <tbody>
+                <div class="col-12" >
+                    
+                          
                         
-                          <?php
-                                $connection = mysqli_connect("localhost","root","");
-                                $db = mysqli_select_db($connection,"sixth_star_forum");
+                         
+                        <?php
+                            // Database Connection
+                            $connection = mysqli_connect("localhost", "root", "");
+                            $db = mysqli_select_db($connection, "sixth_star_forum");
 
-                                $sql = "select * from posts ORDER BY id DESC";
-                                $run = mysqli_query($connection, $sql);
-                                $id= 1;
+                            // Search Term
+                            $search = isset($_GET['search']) ? $_GET['search'] : '';
+                            $search = mysqli_real_escape_string($connection, $search);
 
-                                while($row = mysqli_fetch_array($run))
-                                {
-                                    $uid = $row['id'];
-                                    $title = $row['title'];
-                                    $description = $row['description'];
-                                    $postDate = $row['postDate'];
-                                ?>
+                            // SQL Query with Search Condition
+                            $sql = "SELECT * FROM posts WHERE title LIKE '%$search%' OR description LIKE '%$search%' ORDER BY id DESC";
+                            $run = mysqli_query($connection, $sql);
+                            $id = 1;
+                            while ($row = mysqli_fetch_array($run)) {
+                                $uid = $row['id'];
+                                $title = $row['title'];
+                                $description = $row['description'];
+                                $postDate = $row['postDate'];
+                            ?>
 
-                                   <tr>
+                                 
+<style>
+#blogCard{
+    margin: 10px;
+    border-radius: 10px;
+}
+#postDate{
+    font-size:13px
+}
+#blogBody{
+    margin:20px 10px;
+}
+</style>
+
+<div class="card" id="blogCard">
+                                    <div class="card-body">
+                                        <div>
+                                            <img src="images/sixthstar-linux2-removebg-preview.png" alt="" width="80px">
+                                            <p class="float-right badge badge-primary" id="postDate">posted on
+                                        <?php echo $postDate ?></p>
+                                        </div>
+                                    <div id="blogBody">
+                                    <h2>
+                                            <?php echo $title ?>
+                                        </h2>
+                                        <p >
+                                            <?php echo $description ?>
+                                        </p>
                                         
-                                        <td>
-                                            <h6><?php echo $title ?></h6>
-                                            <p id="descWidth"><?php echo $description ?></p>
-                                        </td>
-                                        <!-- <td id="mobileViewNone">10</td>
-                                        <td id="mobileViewNone">105</td> -->
-                                        <td><?php echo $postDate ?></td>
-                                        <td>
-                                        <a href='updatePost.php?id=<?php echo $uid; ?>'class="btn btn-primary">Update</a>
+                                    </div>
+                                    <div class="float-right">
+                                    <a href='updatePost.php?id=<?php echo $uid; ?>'class="btn btn-primary">Update</a>
                                         <a href='Delete.php?rn=<?php echo $uid; ?>' type="submit" name="delete" class="btn btn-danger" >Delete</a>
                                        
-
-                                            
+                                    </div>
+                                    </div>
+                                </div>     
                                             
                                         </td>
                                         
                                    </tr>
                                     <?php $id++; } ?>
                           
-                        </tbody>
-                      </table>
+                        
                 </div>
 
             </div>

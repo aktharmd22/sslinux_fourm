@@ -86,7 +86,7 @@ function show_write_comment_form($parent_id = -1) {
     <div class="write_comment" data-comment-id="' . $parent_id . '" id="">
         <form>
             <input name="parent_id" type="hidden" value="' . $parent_id . '">
-            <input name="name" type="hidden" value="Admin" required>
+            <input name="name" type="hidden" value="Admin" required id="nameValue">
             <textarea name="content" placeholder="Write your comment here..." required></textarea>
             <button type="submit">Submit Comment</button>
         </form>
@@ -129,12 +129,19 @@ if (isset($_GET['page_id'])) {
 
 <?=show_comments($comments)?>
 </div>
+
 <script>
-        const reply=document.getElementByName('parent_id');
-        const replyBtn=document.getElementById('replyBtn');
-            if(reply=='Admin'){
-                replyBtn.style.display='none';
-            }
-        </script>
+
+    var nameInput = document.getElementById('nameValue').value;
+    
+    var replyButtons = document.getElementById('replyBtn');
+
+    if(nameInput=="Admin"){
+        replyButtons.style.display="none";
+    }
+
+
+
+</script>
 </body>
 </html>

@@ -61,7 +61,7 @@ if (isset($_GET['id'])) {
                             </div>
                             <div class="form-group">
                                 <label>Blog Description</label>
-                                <textarea name="description"
+                                <textarea name="description" id="editor"
                                     class="form-control" style="height: 200px;"><?php echo $post['description']; ?></textarea>
                             </div>
                             <br/>
@@ -76,3 +76,19 @@ if (isset($_GET['id'])) {
 </body>
 
 </html>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ),{
+          ckfinder:
+          {
+            uploadUrl: 'fileupload.php'
+          }
+        })
+        .then(editor => {
+          console.log(editor);
+        })
+        .catch( error => {
+            console.error( error );
+        });
+</script>

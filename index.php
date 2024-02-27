@@ -116,8 +116,7 @@
                     </li>
                     
                     
-                    <li class="nav-item active">
-                        <div class="dropdown">
+                    <li class="nav-item active" style="margin-top:-10px;">
                             <div class="dropdown">
                                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -143,8 +142,13 @@
             <h2>Our Support Center</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, eius?</p>
             <div>
-                <input type="text">
-                <button>Search</button>
+            <form action="" method="get">
+                    
+                    <input type="text"  name="search" placeholder="Search posts" aria-label="Search posts" aria-describedby="button-addon2">
+                   
+                        <button  type="submit" id="button-addon2">Search</button>
+                 
+            </form>
             </div>
         </div>
     </div>
@@ -200,39 +204,58 @@
                         </thead>
                         <tbody >
 
-                            <?php
+                            
+                        <?php
+                            // Database Connection
                             $connection = mysqli_connect("localhost", "root", "");
                             $db = mysqli_select_db($connection, "sixth_star_forum");
 
-                            $sql = "select * from posts ORDER BY id DESC";
+                            // Search Term
+                            $search = isset($_GET['search']) ? $_GET['search'] : '';
+                            $search = mysqli_real_escape_string($connection, $search);
+
+                            // SQL Query with Search Condition
+                            $sql = "SELECT * FROM posts WHERE title LIKE '%$search%' OR description LIKE '%$search%' ORDER BY id DESC";
                             $run = mysqli_query($connection, $sql);
                             $id = 1;
-
                             while ($row = mysqli_fetch_array($run)) {
                                 $uid = $row['id'];
                                 $title = $row['title'];
                                 $description = $row['description'];
                                 $postDate = $row['postDate'];
-                                ?>
+                            ?>
 
-                                
-                                <tr id="Blogs">
+<style>
+#blogCard{
+    margin: 10px;
+    border-radius: 10px;
+}
+#postDate{
+    font-size:13px
+}
+#blogBody{
+    margin:20px 10px;
+}
+</style>
 
-<td>
-    <h6>
-        <?php echo $title ?>
-    </h6>
-    <p id="descWidth">
-        <?php echo $description ?>
-    </p>
-</td>
-<!-- <td id="mobileViewNone">10</td>
-<td id="mobileViewNone">105</td> -->
-<td>
-    post on <?php echo $postDate ?>
-</td>
-</br>
-</tr>
+<div class="card" id="blogCard">
+                                    <div class="card-body">
+                                        <div>
+                                            <img src="images/sixthstar-linux2-removebg-preview.png" alt="" width="80px">
+                                            <p class="float-right badge badge-primary" id="postDate">posted on
+                                        <?php echo $postDate ?></p>
+                                        </div>
+                                    <div id="blogBody">
+                                    <h2>
+                                            <?php echo $title ?>
+                                        </h2>
+                                        <p >
+                                            <?php echo $description ?>
+                                        </p>
+                                        
+                                    </div>
+                                    </div>
+                                </div>
                                 
                                     
 <!-- 
