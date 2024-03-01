@@ -18,7 +18,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,400;1,500;1,600&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="commentstyle.css">
+    <link rel="stylesheet" href="commentstyle.css">
 </head>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
@@ -96,37 +96,17 @@
 
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">HOME<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">ABOUT US</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">COURSES</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">JOB TRAINING</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">CAREERS</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">CONTACT US</a>
-                    </li>
-                    
-                    
                     <li class="nav-item active" style="margin-top:-10px;">
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Login
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="login.php">User Login</a>
-                                    <a class="dropdown-item" href="adminLogin.php">Admin Login</a>
-                                </div>
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Login
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="login.php">User Login</a>
+                                <a class="dropdown-item" href="adminLogin.php">Admin Login</a>
                             </div>
+                        </div>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="registration.php">REGISTER</a>
@@ -142,13 +122,30 @@
             <h2>Our Support Center</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, eius?</p>
             <div>
-            <form action="" method="get">
-                    
-                    <input type="text"  name="search" placeholder="Search posts" aria-label="Search posts" aria-describedby="button-addon2">
-                   
-                        <button  type="submit" id="button-addon2">Search</button>
-                 
-            </form>
+                <form action="" method="get">
+                    <div>
+                        <select name="category" id="category" class="form-select my-2" style="padding:5px 30px;border-radius:20px">
+                            <option value="" selected>Categories</option>
+                            <option value="zimbra">Zimbra Mail Server</option>
+                            <option value="zextras">zextras Carbonio Mail server</option>
+                            <option value="cpanel">Cpanel</option>
+                            <option value="plesk">Plesk</option>
+                            <option value="cwp">CWP</option>
+                            <option value="jboss">JBoss</option>
+                            <option value="ssl">SSL</option>
+                            <option value="os-ticket">OS Ticket</option>
+                            <option value="windows">Windows</option>
+                            <option value="anti-spamcloud">Anti Spamcloud</option>
+                            <option value="general">General</option>
+                        </select>
+                    </div>
+
+                    <input type="text" name="search" placeholder="Search posts" aria-label="Search posts"
+                        aria-describedby="button-addon2">
+
+                    <button type="submit" id="button-addon2">Search</button>
+
+                </form>
             </div>
         </div>
     </div>
@@ -186,15 +183,15 @@
 
         <div class="container">
             <div class="row">
-              <!--   <div class="col-12 col-md-8 col-lg-8" id="query">
+                <!--   <div class="col-12 col-md-8 col-lg-8" id="query">
                     <h3>Can’t find an answer?</h3>
                     <p>Make use of a qualified tutor to get the answer</p>
                     <button class="btn btn-primary float-right" id="askQA">Ask a Question</button>
                 </div> -->
 
 
-                <div class="col-12" >
-                <table class="table table-stripped table-hover" id="forumTable">
+                <div class="col-12">
+                    <table class="table table-stripped table-hover" id="forumTable">
                         <thead>
                             <tr>
                                 <th colspan="4" class="text-center">SS Linux Forum</th>
@@ -202,20 +199,27 @@
                                 <th id="mobileViewNone">Views</th> -->
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
 
-                            
-                        <?php
+
+                            <?php
                             // Database Connection
                             $connection = mysqli_connect("localhost", "root", "");
                             $db = mysqli_select_db($connection, "sixth_star_forum");
 
-                            // Search Term
+                            // Search Term and Category
                             $search = isset($_GET['search']) ? $_GET['search'] : '';
                             $search = mysqli_real_escape_string($connection, $search);
+                            $category = isset($_GET['category']) ? $_GET['category'] : '';
+                            $category = mysqli_real_escape_string($connection, $category);
 
-                            // SQL Query with Search Condition
-                            $sql = "SELECT * FROM posts WHERE title LIKE '%$search%' OR description LIKE '%$search%' ORDER BY id DESC";
+                            // SQL Query with Search and Category Conditions
+                            $sql = "SELECT * FROM posts WHERE (title LIKE '%$search%' OR description LIKE '%$search%')";
+                            if (!empty($category)) {
+                                $sql .= " AND category = '$category'";
+                            }
+                            $sql .= " ORDER BY id DESC";
+
                             $run = mysqli_query($connection, $sql);
                             $id = 1;
                             while ($row = mysqli_fetch_array($run)) {
@@ -223,42 +227,45 @@
                                 $title = $row['title'];
                                 $description = $row['description'];
                                 $postDate = $row['postDate'];
-                            ?>
+                                ?>
 
-<style>
-#blogCard{
-    margin: 10px;
-    border-radius: 10px;
-}
-#postDate{
-    font-size:13px
-}
-#blogBody{
-    margin:20px 10px;
-}
-</style>
+                                <style>
+                                    #blogCard {
+                                        margin: 10px;
+                                        border-radius: 10px;
+                                    }
 
-<div class="card" id="blogCard">
+                                    #postDate {
+                                        font-size: 13px
+                                    }
+
+                                    #blogBody {
+                                        margin: 20px 10px;
+                                    }
+                                </style>
+
+                                <div class="card" id="blogCard">
                                     <div class="card-body">
                                         <div>
                                             <img src="images/sixthstar-linux2-removebg-preview.png" alt="" width="80px">
                                             <p class="float-right badge badge-primary" id="postDate">posted on
-                                        <?php echo $postDate ?></p>
+                                                <?php echo $postDate ?>
+                                            </p>
                                         </div>
-                                    <div id="blogBody">
-                                    <h2>
-                                            <?php echo $title ?>
-                                        </h2>
-                                        <p >
-                                            <?php echo $description ?>
-                                        </p>
-                                        
-                                    </div>
+                                        <div id="blogBody">
+                                            <h2>
+                                                <?php echo $title ?>
+                                            </h2>
+                                            <p>
+                                                <?php echo $description ?>
+                                            </p>
+
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                    
-<!-- 
+
+
+                                <!-- 
                                 
                                 <tr>
                                     <td colspan="4">
@@ -282,22 +289,23 @@
                                     
                                     </td>
                                 </tr> -->
-                               
-                               
-                                <?php $id++;
-                               
-                            } ?>
-                             
+
+
+                                <?php
+    $id++;
+}
+?>
+
 
                         </tbody>
                     </table>
                 </div>
 
             </div>
-                <?php include './comment-section/commentindex.html'?>
+            <?php include './comment-section/commentindex.html' ?>
         </div>
     </div>
-    
+
 
 
 </body>

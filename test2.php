@@ -148,6 +148,21 @@
             <div>
                 <form action="" method="get">
 
+                <select name="category" id="category" class="form-select my-3" style="padding:5px;border-radius:30px">
+                        <option value="" selected>Categories</option>
+                                <option value="zimbra">Zimbra Mail Server</option>
+                                <option value="zextras">zextras Carbonio Mail server</option>
+                                <option value="cpanel">Cpanel</option>
+                                <option value="plesk">Plesk</option>
+                                <option value="cwp">CWP</option>
+                                <option value="jboss">JBoss</option>
+                                <option value="ssl">SSL</option>
+                                <option value="os-ticket">OS Ticket</option>
+                                <option value="windows">Windows</option>
+                                <option value="anti-spamcloud">Anti Spamcloud</option>
+                                <option value="general">General</option>
+                        </select>
+
                     <input type="text" name="search" placeholder="Search posts" aria-label="Search posts"
                         aria-describedby="button-addon2">
 
@@ -216,8 +231,11 @@
                             $search = isset($_GET['search']) ? $_GET['search'] : '';
                             $search = mysqli_real_escape_string($connection, $search);
 
+                            $option = isset($_GET['category']) ? $_GET['category'] : '';
+                            $option = mysqli_real_escape_string($connection, $option);
+
                             // SQL Query with Search Condition
-                            $sql = "SELECT * FROM posts WHERE title LIKE '%$search%' OR description LIKE '%$search%' ORDER BY id DESC";
+                            $sql = "SELECT * FROM posts WHERE title LIKE '%$search%' OR description LIKE '%$search%' or category LIKE '%$option%' ORDER BY id DESC";
                             $run = mysqli_query($connection, $sql);
                             $id = 1;
 
@@ -227,6 +245,7 @@
                                 $title = $row['title'];
                                 $description = $row['description'];
                                 $postDate = $row['postDate'];
+                                $category=$row['category'];
                                 ?>
 
 <style>

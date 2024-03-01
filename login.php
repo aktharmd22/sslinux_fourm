@@ -1,3 +1,76 @@
+<style>
+  .login{
+    width: 420px;
+    background: transparent;
+    border: 0.5px solid; 
+    
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    color:white;
+    border-radius: 10px;
+    padding: 30px 40px;
+    border-color:white;
+    
+  
+    
+    margin-left:-325px;
+    height:400px;
+    
+  }
+  
+  .op{
+    opacity: 0.5;
+    height:180px;
+    border-radius:10px;
+    background:transparent;
+  }
+
+  ::placeholder{
+    color:red;
+    opacity:2;
+    
+  }
+
+  body{
+    background-image:url("images/loginfinal4.jpg");
+    background-size:cover;
+    background-repeat:no-repeat;
+    }
+h3{
+  color:white;
+  
+}
+p{
+  color:white;
+}
+.trans{
+  background:transparent;
+  color:white;
+  width:300px;
+  border-radius:20px;
+  padding:10px;
+  border-color:white;
+}
+::placeholder{
+  color:ghostwhite;
+}
+  
+  
+  
+   
+  
+
+    
+
+  
+</style>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,30 +129,30 @@
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://adrack.com/wp-content/uploads/2021/12/signup.png" class="img-fluid"
-          alt="Sample image">
+        
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
       <form class="form" method="post" name="login">
           
-
+<div class="login" >
+  <div class="op">
           <!-- Email input -->
           <div class="form-outline mb-4">
-          <input type="text" class="login-input form-control form-control-lg" name="username" placeholder="Enter Username" autofocus="true"/>
-            
+          <input class="trans" type="text" id="one" class="login-input form-control form-control-lg" name="username" placeholder="Enter Username" autofocus="true"/>
+          <i class='bx bxs-user'></i>
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-3">
-          <input type="password" class="login-input form-control form-control-lg" name="password" placeholder="Password"/>
-           
+          <input class="trans"type="password" id="two"class="login-input form-control form-control-lg" name="password" placeholder="Password"/>
+    </div>
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
             <!-- Checkbox -->
             <div class="form-check mb-0">
               <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-              <label class="form-check-label" for="form2Example3">
+              <label class="form-check-label" for="form2Example3" style="color:white;">
                 Remember me
               </label>
             </div>
@@ -88,10 +161,11 @@
 
           <div class="text-center text-lg-start mt-4 pt-2">
             
-              <input type="submit" value="Login" name="submit" class="login-button form-control form-control-lg btn btn-primary btn-lg"/>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="registration.php"
-                class="link-danger">Register</a></p>
+              <input type="submit" value="Login" name="submit" style="opacity:0.7; background-color:#236ba6; border:none; " class="login-button form-control form-control-lg btn btn-primary btn-lg"/>
+            <p class="small fw-bold mt-2 pt-1 mb-0" style="color:white; text-shadow: #ecf0f6;">Don't have an account? <a href="registration.php"
+                class="link-danger" style="color:yellow;">Register</a></p>
           </div>
+    </div>
 
         </form>
       </div>

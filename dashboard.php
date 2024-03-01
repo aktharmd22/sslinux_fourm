@@ -91,25 +91,6 @@ s0.parentNode.insertBefore(s1,s0);
                     
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">HOME<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">ABOUT US</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">COURSES</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">JOB TRAINING</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">CAREERS</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">CONTACT US</a>
-                    </li>
-                   
                     
                     
                     <li class="nav-item active">
@@ -132,7 +113,22 @@ s0.parentNode.insertBefore(s1,s0);
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, eius?</p>
             <div>
             <form action="" method="get">
-                    
+            <div>
+                        <select name="category" id="category" class="form-select my-2" style="padding:5px 30px;border-radius:20px">
+                            <option value="" selected>Categories</option>
+                            <option value="zimbra">Zimbra Mail Server</option>
+                            <option value="zextras">zextras Carbonio Mail server</option>
+                            <option value="cpanel">Cpanel</option>
+                            <option value="plesk">Plesk</option>
+                            <option value="cwp">CWP</option>
+                            <option value="jboss">JBoss</option>
+                            <option value="ssl">SSL</option>
+                            <option value="os-ticket">OS Ticket</option>
+                            <option value="windows">Windows</option>
+                            <option value="anti-spamcloud">Anti Spamcloud</option>
+                            <option value="general">General</option>
+                        </select>
+                    </div>
                     <input type="text"  name="search" placeholder="Search posts" aria-label="Search posts" aria-describedby="button-addon2">
                    
                         <button  type="submit" id="button-addon2">Search</button>
@@ -194,17 +190,25 @@ s0.parentNode.insertBefore(s1,s0);
                         <tbody >
 
                             
+                        
                         <?php
                             // Database Connection
                             $connection = mysqli_connect("localhost", "root", "");
                             $db = mysqli_select_db($connection, "sixth_star_forum");
 
-                            // Search Term
+                            // Search Term and Category
                             $search = isset($_GET['search']) ? $_GET['search'] : '';
                             $search = mysqli_real_escape_string($connection, $search);
+                            $category = isset($_GET['category']) ? $_GET['category'] : '';
+                            $category = mysqli_real_escape_string($connection, $category);
 
-                            // SQL Query with Search Condition
-                            $sql = "SELECT * FROM posts WHERE title LIKE '%$search%' OR description LIKE '%$search%' ORDER BY id DESC";
+                            // SQL Query with Search and Category Conditions
+                            $sql = "SELECT * FROM posts WHERE (title LIKE '%$search%' OR description LIKE '%$search%')";
+                            if (!empty($category)) {
+                                $sql .= " AND category = '$category'";
+                            }
+                            $sql .= " ORDER BY id DESC";
+
                             $run = mysqli_query($connection, $sql);
                             $id = 1;
                             while ($row = mysqli_fetch_array($run)) {
@@ -212,7 +216,7 @@ s0.parentNode.insertBefore(s1,s0);
                                 $title = $row['title'];
                                 $description = $row['description'];
                                 $postDate = $row['postDate'];
-                            ?>
+                                ?>
 
 <style>
 #blogCard{
@@ -231,8 +235,10 @@ s0.parentNode.insertBefore(s1,s0);
                                     <div class="card-body">
                                         <div>
                                             <img src="images/sixthstar-linux2-removebg-preview.png" alt="" width="80px">
+                                           
                                             <p class="float-right badge badge-primary" id="postDate">posted on
                                         <?php echo $postDate ?></p>
+
                                         </div>
                                     <div id="blogBody">
                                     <h2>

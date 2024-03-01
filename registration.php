@@ -1,3 +1,95 @@
+<style>
+  body{
+    background-image:url("images/registerfinal5.jpg");
+    background-size:cover;
+    background-repeat:no-repeat;
+
+  }
+
+  .reg{
+    width: 420px;
+    background: transparent;
+    border: 0.5px solid; 
+    
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    color:black;
+    border-radius: 10px;
+    padding: 30px 40px;
+    border-color:black;
+    margin-left:-300px;
+    color:white;
+   
+    
+  }
+  .inp{
+    opacity:0.5;
+    background:transparent;
+    color:white;
+    
+    
+  }
+  h3{
+    color:white;
+  }
+  p{
+    color:white;
+  }
+  #one{
+    background:transparent;
+    
+    background-color: black;
+    color:white;
+border-radius:100px;
+  }
+  #two{
+    background:transparent;
+    color:white;
+    background-color: black;
+color: white;
+border-radius:100px;
+  }
+  #three{
+    background:transparent;
+    color:white;
+    background-color: black;
+color: white;
+border-radius:100px;
+  }
+  #four{
+    background:transparent;
+    color:white;
+    background-color: black;
+color: white;
+border-radius:100px;
+  }
+  #five{
+    background:transparent;
+    color:black;
+    background-color: black;
+color: white;
+border-radius:100px;
+  }
+  input::placeholder{
+    font-weight: italic;
+  
+  color:white;
+  
+  
+  }
+  
+  
+    
+    
+  
+  </style>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,44 +155,45 @@
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://ncetir.com/Images/login@4x.png" class="img-fluid"
-          alt="Sample image">
+        
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
       <form class="form" action="" method="post">
           
 
           <!-- username input -->
+          <div class="reg">
+            <div class="inp">
           <div class="form-outline mb-4">
-          <input type="text" class="login-input form-control form-control-lg" name="username" placeholder="Enter Username" autofocus="true"/>
+          <input id="one" type="text" class="login-input form-control form-control-lg" name="username" placeholder="Enter Username" autofocus="true"/>
             
           </div>
 
           <!-- Email input -->
           <div class="form-outline mb-4">
-          <input type="text" class="login-input form-control form-control-lg" name="email" placeholder="Email Address">
+          <input id="two" type="text" class="login-input form-control form-control-lg" name="email" placeholder="Email Address">
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-3">
-          <input type="password" class="login-input form-control form-control-lg" name="password" placeholder="Password"/>
+          <input id="three" type="password" class="login-input form-control form-control-lg" name="password" placeholder="Password"/>
            
           </div>
           <!-- confirm password -->
           <div class="form-outline mb-3">
-          <input type="password" class="login-input form-control form-control-lg" name="confirm_password" placeholder="confirm Password"/>
+          <input id="four" type="password" class="login-input form-control form-control-lg" name="confirm_password" placeholder="confirm Password"/>
            
           </div>
           <div class="form-outline mb-3">
-          <input type="tel" class="login-input form-control form-control-lg" name="phone" placeholder="Contact Number"/>
-           
+          <input id="five" type="tel" class="login-input form-control form-control-lg" name="phone" placeholder="Contact Number"/>
+    </div>
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
             <!-- Checkbox -->
             <div class="form-check mb-0">
               <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-              <label class="form-check-label" for="form2Example3">
+              <label style="color:white;" class="form-check-label" for="form2Example3">
                 Remember me
               </label>
             </div>
@@ -109,9 +202,10 @@
 
           <div class="text-center text-lg-start mt-4 pt-2">
             
-              <input type="submit" name="submit" value="Register" class="login-button form-control form-control-lg btn btn-primary btn-lg">
-                <p class="link small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="login.php">Login here</a></p>
+              <input style="border-radius:100px;" type="submit" name="submit" value="Register" class="login-button form-control form-control-lg btn btn-primary btn-lg">
+                <p style="color:white;" class="link small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="login.php" style="color:yellow;">Login here</a></p>
           </div>
+    </div>
 
         </form>
       </div>
